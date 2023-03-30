@@ -1,0 +1,2 @@
+# ros_gazebo_navigation
+使用Gazebo仿真和ros的navigation栈实现了二轮差速小车的建图导航和避障，并添加了cartographer纯定位的使用和基于图像匹配的重定位功能。
