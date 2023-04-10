@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="my_ultrasonic" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="ultrasonic_sensor" params="name topic link">
+      <gazebo reference="${link}">
+        <sensor type="ray" name="${name}">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+              <scan>
+                <horizontal>
+                  <samples>8</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.14</min_angle>
+                  <max_angle>0.14</max_angle>
+                </horizontal>
+                <vertical>
+                  <samples>7</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.1</min_angle>
+                  <max_angle>0.14</max_angle>
+                </vertical>
+              </scan>
+              <range>
+                <min>0.1</min>
+                <max>5</max>
+                <resolution>0.1</resolution>
+              </range>
+            </ray>
+            <plugin name="ultrasonic_sensor_controller" filename="libgazebo_ros_range.so">
+              <gaussianNoise>0.01</gaussianNoise>
+              <alwaysOn>true</alwaysOn>
+              <updateRate>10</updateRate>
+              <topicName>${topic}</topicName>
+              <frameName>${link}</frameName>
+              <fov>0.1</fov>
+              <radiation>ultrasound</radiation> 
+              <min_angle>-0.1308</min_angle> 
+              <max_angle>0.1308</max_angle> 
+            </plugin>
+          </sensor>
+      </gazebo>
+    </xacro:macro>
+
+    <xacro:ultrasonic_sensor name="front_left_ultrasonic_sensor" topic="front_left_ultrasonic" link="front_left_ultrasonic_link" />
+    <xacro:ultrasonic_sensor name="front_right_ultrasonic_sensor" topic="front_right_ultrasonic" link="front_right_ultrasonic_link" />
+    <xacro:ultrasonic_sensor name="back_left_ultrasonic_sensor" topic="back_left_ultrasonic" link="back_left_ultrasonic_link" />
+    <xacro:ultrasonic_sensor name="back_right_ultrasonic_sensor" topic="back_right_ultrasonic" link="back_right_ultrasonic_link" />
+</robot>

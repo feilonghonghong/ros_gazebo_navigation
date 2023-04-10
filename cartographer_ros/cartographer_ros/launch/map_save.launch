@@ -1,0 +1,4 @@
+<launch>
+	<node pkg="map_server" type="map_saver" name="map_saver" args="-f /home/wfl/map/map_indoor" output="screen">	
+	</node>
+</launch>

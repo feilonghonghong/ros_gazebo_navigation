@@ -1,0 +1,21 @@
+<launch>
+
+<!-- <include file="$(find navigation_2d)/launch/amcl_run.launch" /> -->
+ <include file="$(find navigation_2d)/launch/carto_pure_localization.launch" /> 
+
+<rosparam file="$(find navigation_2d)/param/local_costmap_params.yaml" command="load" ns="move_base"/>
+<rosparam file="$(find navigation_2d)/param/global_costmap_params.yaml" command="load" ns="move_base"/>
+<rosparam file="$(find navigation_2d)/param/base_global_planner_params.yaml" command="load" ns="move_base"/>
+<rosparam file="$(find navigation_2d)/param/move_base_params.yaml" command="load" ns="move_base"/>
+
+<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+    <rosparam file="$(find navigation_2d)/param/dwa_local_planner_params.yaml"  command="load"/>
+    <rosparam file="$(find navigation_2d)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find navigation_2d)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+</node>
+
+<!-- 启动 rviz -->
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find car_robot_description)/rviz/config.rviz">
+    <remap from="/initialpose" to= "/initialpose"/>
+</node>
+</launch>

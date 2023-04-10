@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot name="my_ultrasonic" xmlns:xacro="http://www.ros.org/wiki/xacro">
+        <gazebo reference="front_ultrasonic_link">
+          <sensor type="ray" name="front_ultrasonic_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+              <scan>
+                <horizontal>
+                  <samples>8</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.14</min_angle>
+                  <max_angle>0.14</max_angle>
+                </horizontal>
+                <vertical>
+                  <samples>10</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.14</min_angle>
+                  <max_angle>0.14</max_angle>
+                </vertical>
+              </scan>
+              <range>
+                <min>0.1</min>
+                <max>3</max>
+                <resolution>0.1</resolution>
+              </range>
+            </ray>
+            <plugin name="ultrasonic_sensor_controller" filename="libgazebo_ros_range.so">
+              <gaussianNoise>0.01</gaussianNoise>
+              <alwaysOn>true</alwaysOn>
+              <updateRate>10</updateRate>
+              <topicName>front_ultrasonic_sensor</topicName>
+              <frameName>front_ultrasonic_link</frameName>
+              <fov>0.1</fov>
+              <radiation>ultrasound</radiation> 
+              <min_angle>-0.1308</min_angle> 
+              <max_angle>0.1308</max_angle> 
+            </plugin>
+          </sensor>
+        </gazebo>
+
+        <gazebo reference="back_ultrasonic_link">
+        <sensor type="ray" name="back_ultrasonic_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+              <scan>
+                <horizontal>
+                  <samples>8</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.14</min_angle>
+                  <max_angle>0.14</max_angle>
+                </horizontal>
+                <vertical>
+                  <samples>10</samples>
+                  <resolution>1</resolution>
+                  <min_angle>-0.14</min_angle>
+                  <max_angle>0.14</max_angle>
+                </vertical>
+              </scan>
+              <range>
+                <min>0.05</min>
+                <max>3</max>
+                <resolution>0.1</resolution>
+              </range>
+            </ray>
+            <plugin name="ultrasonic_sensor_controller" filename="libgazebo_ros_range.so">
+              <gaussianNoise>0.01</gaussianNoise>
+              <alwaysOn>true</alwaysOn>
+              <updateRate>10</updateRate>
+              <topicName>back_ultrasonic_sensor</topicName>
+              <frameName>back_ultrasonic_link</frameName>
+              <fov>0.1</fov>
+              <radiation>ultrasound</radiation> 
+              <min_angle>-0.1308</min_angle> 
+              <max_angle>0.1308</max_angle> 
+            </plugin>
+          </sensor>
+        </gazebo>
+</robot>

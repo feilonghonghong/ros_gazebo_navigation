@@ -1,0 +1,11 @@
+<robot name="my_hello_robot" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="my_head.xacro" />
+    <xacro:include filename="my_base.xacro" />
+    <xacro:include filename="my_camera.xacro" />
+    <xacro:include filename="my_laser.xacro" />
+    <xacro:include filename="move_control.xacro" />
+    <xacro:include filename="laser_sensor.xacro" />
+    <xacro:include filename="kinect_camera.xacro" />
+</robot>
+
+

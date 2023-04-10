@@ -1,0 +1,8 @@
+<launch>
+
+<!-- 启动 rviz -->
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find car_robot_description)/rviz/config.rviz">
+    <remap from="/initialpose" to= "/initialpose"/>
+</node>
+
+</launch>

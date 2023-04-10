@@ -1,0 +1,39 @@
+<robot name="my_ultrasonic" xmlns:xacro="http://wiki.ros.org/xacro">
+
+<xacro:property name="ultrasonic_length" value="0.03" />
+<xacro:property name="ultrasonic_radius" value="0.01" />
+<xacro:property name="ultrasonic_mass" value="0.15" />
+
+<xacro:macro name="add_ultrasonic" params="name flag yaw">
+    <xacro:property name="ultrasonic_z" value="${base_link_length/2 + ultrasonic_length/2}" />
+    <link name="${name}_ultrasonic_link">
+        <visual>
+            <geometry>
+               <cylinder radius="${ultrasonic_radius}" length="${ultrasonic_length}" />
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <material name="black" />
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="${ultrasonic_radius}" length="${ultrasonic_length}" />
+            </geometry>
+	    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        </collision>
+        <xacro:cylinder_inertial_matrix m="${ultrasonic_mass}" r="${ultrasonic_radius}" h="${ultrasonic_length}"/>
+    </link>
+
+    <gazebo reference="${name}_ultrasonic_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+ 
+    <joint name="${name}_ultrasonic2base" type="fixed">
+        <parent link="base_link" />
+        <child link="${name}_ultrasonic_link" />
+        <origin xyz="${flag*(base_link_radius-0.01)} 0 ${ultrasonic_z}" rpy="0.0 0.0 ${yaw}"/>
+    </joint>
+</xacro:macro>
+
+    <xacro:add_ultrasonic name="front" flag="1" yaw="0.0"/>
+    <xacro:add_ultrasonic name="back" flag="-1" yaw="${PI}"/> 
+</robot>
